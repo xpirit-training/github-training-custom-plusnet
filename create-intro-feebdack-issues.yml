@@ -1,0 +1,26 @@
+name: Creating intro & feedback issues
+
+on: [create, workflow_dispatch]
+
+permissions: 
+  issues: write
+  contents: read
+
+jobs:
+  initialize_repo:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Create Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create -t "❓ What is your experience with GitHub?" -b "What is your experience with GitHub? Comment below 👇"
+          gh issue create -t "🔍 Retro Day one: What was good?" -b "What did you like on day one of this course? What was good? Comment below 👇"
+          gh issue create -t "❤️ What was the best feature you learned yesterday?" -b "What was the GitHub feature you liked the most that you have learned about yesterday the first time? Comment below 👇"        
+          gh issue create -t "🔍 Retro Day two: What was good?" -b "What did you like on day two of this course? What was good? Comment below 👇"
+          gh issue create -t "❤️ What was the best feature you learned yesterday?" -b "What was the GitHub feature you liked the most that you have learned about yesterday the first time? Comment below 👇"        
+          gh issue create -t "🔍 Retro Day three: What was good?" -b "What did you like on day three of this course? What was good? Comment below 👇"
+          gh issue create -t "❓ Questions parking lot" -b "Do you have some questions about GitHub? Just use a comment and ask everything you want👇"
